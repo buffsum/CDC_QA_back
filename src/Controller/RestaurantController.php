@@ -10,85 +10,89 @@ use DateTimeImmutable;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+// use Symfony\Component\HttpFoundation\JsonResponse;
+// use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-// use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\{JsonResponse, Request, Response};
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 #[Route('api/restaurant', name: 'app_api_restaurant_')]
 class RestaurantController extends AbstractController
 {
     // toutes la class "RestaurantController" va recevoir ces deux dépendances
     // "EntityManagerInterface" pour envoyer de l'info en bdd et "RestaurantRepository" pour récupérer de l'info en bdd
-    public function __construct(private EntityManagerInterface $manager, private RestaurantRepository $repository) // ou $restaurantRepository ?
-    {
+    public function __construct(
+        private EntityManagerInterface $manager,
+        private RestaurantRepository $repository,
+        private SerializerInterface $serializer,
+        private UrlGeneratorInterface $urlGenerator,
+        )
+        {
     }
-    #[Route(name: 'new', methods: 'POST')]
-    // new / show / edit / delete sont mes fonctions de CRUD
-    public function new(): Response
+
+    #[Route(methods: 'POST')]
+    public function new(Request $request): JsonResponse
     {
-        $restaurant = new Restaurant(); // bien définir 'Restaurant' dans le use comme 'use App\Entity\Restaurant;'
-        $restaurant->setName(name: 'Quai Antique 4');
-        $restaurant->setDescription(description: 'test');
-        $restaurant->setCreatedAt(new \DateTimeImmutable());
-        $restaurant->setMaxGuest(40);
-        // $restaurant->setAmOpeningTime('13:00');
-        // $restaurant->setPmOpeningTime('19:00');
+        $restaurant = $this->serializer->deserialize($request->getContent(), Restaurant::class, 'json');
+        $restaurant->setCreatedAt(new DateTimeImmutable());  // Correction ici
+        
+        $this->manager->persist($restaurant); // liste d'attente, on attend le flush pour envoyer en bdd. seulement pour new
+        $this->manager->flush(); // on push en bdd
 
-        // À stocker en base (donc via EntityManagerInterface)
-        $this->manager->persist($restaurant); // fil d'attente où tous les nouveaux objets doivent listé par Doctrine via persist() / indispensable pour les nouveaux objets
-        $this->manager->flush(); // puis on va push ça dans la bdd via flush()
-
-        return $this->json(
-            ['message' => "Restaurant créé {$restaurant->getId()} id"],
-            Response::HTTP_CREATED,
-        );
+        $responseData = $this->serializer->serialize($restaurant, 'json');
+        $location = $this->urlGenerator->generate(
+            'app_api_restaurant_show',
+             ['id' => $restaurant->getId()],
+             UrlGeneratorInterface::ABSOLUTE_URL
+            );
+            
+            return new JsonResponse($responseData, Response::HTTP_CREATED, ["Location" => $location], true);
     }
+
     #[Route('/{id}', name: 'show', methods: 'GET')]
-    public function show(int $id): Response
+    public function show(int $id): JsonResponse
     {
         $restaurant = $this->repository->findOneBy(['id' => $id]);
-        // $restaurant = CHERCHER LE RESTAURANT ID = 1 ($id) (donc via RestaurantRepository)
-        if (!$restaurant) {
-            // throw $this->createNotFoundException("No restaurant found for id $id");
-            throw new \Exception("No restaurant found for id $id");
+        if ($restaurant) {
+            $responseData = $this->serializer->serialize($restaurant, 'json');
         }
-        // même chose que d'écrire : return new JsonResponse(['message' => 'Restaurant de ma BDD']);
-        return $this->json(
-            ['message' => "A restaurant was found : ' {$restaurant->getName()} with id #{$restaurant->getId()}"]
-        );
+        return new JsonResponse($responseData, Response::HTTP_OK, [], true);
     }
     #[Route('/{id}', name: 'edit', methods: 'PUT')]
-    public function edit(int $id): Response
+    public function edit(int $id, Request $request): JsonResponse
     {
         $restaurant = $this->repository->findOneBy(['id' => $id]);
-        // pour l'instant en dur mais plus tard en dynamique avec la BDD
-        if (!$restaurant) {
-            throw new \Exception("No restaurant found for id $id");
+        if ($restaurant) {
+            $restaurant = $this->serializer->deserialize(
+                $request->getContent(),
+                Restaurant::class,
+                'json',
+                [AbstractNormalizer::OBJECT_TO_POPULATE => $restaurant]
+            );
+            $restaurant->setUpdatedAt(new DateTimeImmutable());
+
+            $this->manager->flush();
+
+            return new JsonResponse(null, Response::HTTP_NO_CONTENT);
         }
-
-        $restaurant->setName('Restaurant name update');
-
-        // pas besoin de persist (comme dans new) car l'objet est déjà enregistré en BDD / connu de l'entity manager
-        $this->manager->flush();
-
-        return $this->redirectToRoute('app_api_restaurant_show', ['id' => $restaurant->getId()]);
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
+
     #[Route('/{id}', name: 'delete', methods: 'DELETE')]
-    public function delete(int $id): Response
+    public function delete(int $id): JsonResponse
     {
         $restaurant = $this->repository->findOneBy(['id' => $id]);
+        if ($restaurant) {
+            $this->manager->remove($restaurant);
+            $this->manager->flush();
 
-        if (!$restaurant) {
-            throw new \Exception("No restaurant found for id $id");
+            return new JsonResponse(null, Response::HTTP_NO_CONTENT);
         }
 
-        $this->manager->remove($restaurant);
-        $this->manager->flush();
-
-        return $this->json(['message' => 'Restaurant deleted'], Response::HTTP_NO_CONTENT);
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 }
