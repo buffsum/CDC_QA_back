@@ -18,7 +18,7 @@ security:
             lazy: true
             stateless: true # principe de sécurité pour les API qui ne doivent pas garder les données entre chaque session
             provider: app_user_provider
-            custom_authenticator: App\Security\ApiTokenAuthentificatorAuthenticator
+            custom_authenticator: App\Security\ApiTokenAuthentificator
             json_login:
                 check_path: app_api_login
             
