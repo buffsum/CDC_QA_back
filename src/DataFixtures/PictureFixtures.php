@@ -9,15 +9,17 @@ use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Exception;
 
 
 class PictureFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
+        /** @throws Exception */
         for ($i = 1; $i <= 20; $i++) {
             /** @var Restaurant $restaurant*/
-            $restaurant = $this->getReference("restaurant_$i");
+            $restaurant = $this->getReference(RestaurantFixtures::RESTAURANT_REFERENCE, $i);
 
             $picture = (new Picture())
                 ->setTitle("Image n° $i")
