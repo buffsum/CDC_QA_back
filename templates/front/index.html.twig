@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="scss/main.css"> #}
     <link rel="stylesheet" href="{{ asset('css/scss/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/node_modules/bootstrap-icons/font/bootstrap-icons.css') }}">
+    {# <link rel="stylesheet" href="{{ asset('css/node_modules/bootstrap/dist/css/bootstrap.min.css') }}"> #}
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,11 +66,68 @@
     </header>
 
     <main id="main-page">
-        <h1>Home</h1>
-        
-        <!-- le contenu de la page sera contenu ici -->
-        <!-- <a href="about.php">About</a>
-        <a href="contact.php">Contact</a> -->
+      <div class="bigtitle text-center">
+        <div class="bigtitle-content">
+          <p>Le chef Arnaud Michant vous invite au</p>
+            <h1>Quai Antique</h1>
+            <!-- <button class="btn btn-primary">Réserver</button> -->
+            <a href="/reserver" class="btn btn-primary">Réserver</a>
+        </div>
+      </div>
+
+      <section>
+          <article>
+              <div class="container">
+                  <div class="row g-0"> <!-- g-0 supprime les gutters -->
+                      <div class="col-6 home-square1 d-flex justify-content-center align-items-center">
+                          {# <img src="/img/chef.jpg" alt="chef" class="w-100"> #}
+                          <div class="text-center">
+                              <a href="#" class="btn btn-secondary">Nos menus</a>
+                          </div>
+                      </div>
+                      <div class="col-6 pt-4 d-flex flex-column justify-content-center align-items-end text-end">
+                          <h2>Bienvenue au Quai Antique</h2>
+                          <p>Bienvenu sur le site de notre restaurant grastronomique <br/> 
+                              situé au coeur de la magnifique ville de Chambéry.<br/> 
+                              Le chef Arnaut Michant vous invite à découvrir <br/>
+                              un voyage culinaire mémorable.</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="container">
+                  <div class="row bg-dark">
+                      <div class="col-6 pt-4 d-flex flex-column justify-content-center align-items-start text-start">
+                          <h2>Des produits frais</h2>
+                          <p>Découvrez la richesse des saveurs avec nos plats <br/>
+                              élaborés à partir de poduits frais et de saison, <br/>
+                              cueillit et produit localement.</p>
+                      </div>
+                      <div class="col-6 home-square2 d-flex justify-content-center align-items-center">
+                          {# <img src="/img/chef.jpg" alt="chef" class="w-100"> #}
+                          <div class="text-center">
+                              <a href="/galerie" class="btn btn-secondary">Voir la galerie</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="container">
+                  <div class="row g-0"> <!-- g-0 supprime les gutters -->
+                      <div class="col-6 home-square3 d-flex justify-content-center align-items-center">
+                          {# <img src="/img/chef.jpg" alt="chef" class="w-100"> #}
+                          <div class="text-center">
+                              <a href="#" class="btn btn-primary">Réserver</a>
+                          </div>
+                      </div>
+                      <div class="col-6 pt-4 d-flex flex-column justify-content-center align-items-end text-end">
+                          <h2>Réservation en ligne</h2>
+                          <p>Nous sommes ouverts du Mardi au Samedi. <br/>
+                              Vous pouvez directement réserver votre table sur le site ! <br/>
+                              Il suffit de cliquer sur le bouton ci-dessous.</p>
+                      </div>
+                  </div>
+              </div>
+          </article>
+      </section>
     </main>
 
     <footer class="bg-dark text-white text-center footer py-4">

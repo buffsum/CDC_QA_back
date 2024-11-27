@@ -66,11 +66,40 @@
     </header>
 
     <main id="main-page">
-        <h1>Home</h1>
-        
-        <!-- le contenu de la page sera contenu ici -->
-        <!-- <a href="about.php">About</a>
-        <a href="contact.php">Contact</a> -->
+        <div class="bigtitle text-center">
+            <div class="bigtitle-content">
+                <h1>Mon compte</h1>
+            </div>
+        </div>
+
+        </div>
+        <div class="container col-8 pt-4">
+            <form>
+                <div class="mb-3">
+                    <label for="NomInput" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="NomInput" placeholder="Votre nom" name="Nom" value="John"> 
+                </div>
+                <div class="mb-3">
+                    <label for="PrenomInput" class="form-label">Prénom</label>
+                    <input type="text" class="form-control" id="PrenomInput" placeholder="Votre prénom" name="Prenom" value="Doe"> 
+                </div>
+                <div class="mb-3">
+                <label for="AllergiesInput" class="form-label">Allergies</label>
+                <input type="text" class="form-control" id="AllergiesInput" placeholder="Vos allergies (fruits de mer, arachides, etc.)" name="Allergies" value="Cacahuète"> 
+                </div>
+                <div class="mb-3">
+                    <label for="ConvivesInput" class="form-label">Nombre de convives habituel</label>
+                    <input type="Number" class="form-control" id="ConvivesInput" placeholder="Combien êtes-vous habituellement ?" name="Convives" value="4"> 
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Modifier vos informations</button>
+                    <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+                </div>
+            </form>
+            <div class="text-center pt-3">
+                <a href="/editPassword">Cliquez ici pour modifier votre mot de passe</a>
+            </div>
+        </div>
     </main>
 
     <footer class="bg-dark text-white text-center footer py-4">
@@ -98,37 +127,3 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-{# <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-            <link rel="stylesheet" href="{{ asset('bundles/nelmioapidoc/swagger-ui/swagger-ui.css') }}">
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-        <script>
-        // Exemple : récupérer les données d'un endpoint API
-        fetch('/api/doc', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Données récupérées :', data);
-            // Vous pouvez manipuler les données et les insérer dans le DOM
-        })
-        .catch(error => console.error('Erreur lors de l\'appel API :', error));
-        </script>
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html> #}

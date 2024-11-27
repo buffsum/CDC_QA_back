@@ -7,6 +7,31 @@ galerie:
     controller: App\Controller\HomeController::galerie
     methods: GET
 
+account:
+    path: /account
+    controller: App\Controller\HomeController::account
+    methods: GET
+
+signin:
+    path: /signin
+    controller: App\Controller\HomeController::signin
+    methods: GET
+
+editPassword:
+    path: /editPassword
+    controller: App\Controller\HomeController::editPassword
+    methods: GET
+
+allResa:
+    path: /allResa
+    controller: App\Controller\HomeController::allResa
+    methods: GET
+
+reserver:
+    path: /reserver
+    controller: App\Controller\HomeController::reserver
+    methods: GET
+
 app.swagger_ui:
     path: /api/doc
     methods: GET

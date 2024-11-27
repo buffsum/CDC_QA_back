@@ -66,11 +66,67 @@
     </header>
 
     <main id="main-page">
-        <h1>Home</h1>
+        <div class="bigtitle text-center">
+            <div class="bigtitle-content">
+                <h1>Réserver</h1>
+            </div>
+        </div>
+        <div class="container col-8 pt-4">
+            <form>
+                <div class="mb-3">
+                    <label for="NomInput" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="NomInput" placeholder="Votre nom" value="John" name="Nom" > 
+                </div>
+                <div class="mb-3">
+                    <label for="PrenomInput" class="form-label">Prénom</label>
+                    <input type="text" class="form-control" id="PrenomInput" placeholder="Votre prénom" value="Doe" name="Prenom"> 
+                </div>
+                <div class="mb-3">
+                <label for="AllergieInput" class="form-label">Allergies</label>
+                <input type="text" class="form-control" id="AllergieInput" placeholder="Vos allergies (fruits de mer, arachides..)"  value="Cacahuètes" name="Allergies"> 
+                </div>
+                <div class="mb-3">
+                    <label for="NbConvivesInput" class="form-label">Nombres de convives habituel</label>
+                    <input type="number" class="form-control" id="NbConvivesInput" placeholder="Combien vous êtes habituellement ?"  value="4" name="NbConvives"> 
+                </div>
+                <div class="mb-3">
+                    <label for="DateInput" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="DateInput" name="Date"> 
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="serviceChoisi" id="midiRadio">
+                        <label class="form-check-label" for="midiRadio">
+                            Midi
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" name="serviceChoisi" id="soirRadio" checked>
+                        <label class="form-check-label" for="soirRadio">
+                            Soir
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="selectHour" class="form-label">Heure</label>
+                    <select class="form-select" id="selectHour" name="Heure">
+                        <option>19:30</option>
+                        <option>19:45</option>
+                        <option>20:00</option>
+                        <option>20:15</option>
+                        <option>20:30</option>
+                        <option>20:45</option>
+                        <option>21:00</option>
+                        <!-- changer pour le midi, adapter selon sur quoi on clique (midi ou soir) -->
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Réserver</button>
+                    <button type="button" class="btn btn-danger">Annuler</button>
+                </div>
+            </form>
+        </div>
         
-        <!-- le contenu de la page sera contenu ici -->
-        <!-- <a href="about.php">About</a>
-        <a href="contact.php">Contact</a> -->
     </main>
 
     <footer class="bg-dark text-white text-center footer py-4">
@@ -98,37 +154,3 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-{# <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-            <link rel="stylesheet" href="{{ asset('bundles/nelmioapidoc/swagger-ui/swagger-ui.css') }}">
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-        <script>
-        // Exemple : récupérer les données d'un endpoint API
-        fetch('/api/doc', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Données récupérées :', data);
-            // Vous pouvez manipuler les données et les insérer dans le DOM
-        })
-        .catch(error => console.error('Erreur lors de l\'appel API :', error));
-        </script>
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html> #}
