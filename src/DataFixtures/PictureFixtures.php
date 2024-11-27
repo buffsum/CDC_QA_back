@@ -10,6 +10,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Exception;
+use Faker;
 
 
 class PictureFixtures extends Fixture implements DependentFixtureInterface
@@ -17,13 +18,14 @@ class PictureFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         /** @throws Exception */
+        $faker = \Faker\Factory::create();
         for ($i = 1; $i <= 20; $i++) {
             /** @var Restaurant $restaurant*/
-            $restaurant = $this->getReference(RestaurantFixtures::RESTAURANT_REFERENCE, $i);
+            $restaurant = $this->getReference(RestaurantFixtures::RESTAURANT_REFERENCE . random_int(1, 20));
 
             $picture = (new Picture())
-                ->setTitle("Image n° $i")
-                ->setSlug("Slug-article-titlre")
+                ->setTitle($faker->sentence())
+                ->setSlug($faker->slug())
                 ->setRestaurant($restaurant)
                 ->setCreatedAt(new DateTimeImmutable());
 
