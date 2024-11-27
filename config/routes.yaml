@@ -1,6 +1,11 @@
-# index:
-#    path: /
-#    controller: App\Controller\HomeController::home
+home:
+   path: /
+   controller: App\Controller\HomeController::home
+
+galerie:
+    path: /galerie
+    controller: App\Controller\HomeController::galerie
+    methods: GET
 
 app.swagger_ui:
     path: /api/doc

@@ -12,6 +12,21 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        <script>
+        // Exemple : récupérer les données d'un endpoint API
+        fetch('/api/doc', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Données récupérées :', data);
+            // Vous pouvez manipuler les données et les insérer dans le DOM
+        })
+        .catch(error => console.error('Erreur lors de l\'appel API :', error));
+        </script>
     </head>
     <body>
         {% block body %}{% endblock %}

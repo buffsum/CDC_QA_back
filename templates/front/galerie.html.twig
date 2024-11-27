@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="scss/main.css"> #}
+    <link rel="stylesheet" href="{{ asset('css/scss/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/node_modules/bootstrap-icons/font/bootstrap-icons.css') }}">
+    {# <link rel="stylesheet" href="{{ asset('css/node_modules/bootstrap/dist/css/bootstrap.min.css') }}"> #}
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rasa:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Rasa:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Rasa:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">
+                <img src="img/Logo-3.png" alt="logo Quai Antique" style= "height : 50px;">
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <!-- mb-2 = margin bottom 2 / ms-auto = marge à gauche au lieu de droite donc m start au lieu de me -->
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Accueil</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ path('galerie') }}">Galerie</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/test">La carte</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/allResa">Vos réservations</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/account">Mon compte</a>
+                  </li>
+                  <li class="nav-item" data-show="disconnected"> <!-- à cacher si l'utilisateur est connecté -->
+                    <a class="nav-link" href="/signin">Connexion</a>
+                  </li>
+                  <li class="nav-item" data-show="connected"> <!-- à cacher si l'utilisateur est déconnecté -->
+                    <button class="nav-link" id="signout-btn">Déconnexion</button>
+                    <!-- co/déco à gérer plus tard -->
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
+
+    <main id="main-page">
+        <div class="bigtitle text-center">
+    <div class="bigtitle-content">
+        <h1>Galerie</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="text-center pt-4">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditionPhotoModal" data-show="admin">Ajouter une photo</button>
+    </div>
+    <div class="row row-cols-3 row-cols-lg-4" id="allImg">
+        {# row-cols-3 = 3 images en mobile, row-cols-lg-4 = 4 images en desktop #}
+        <div class="col pt-3">
+            <div class="img-card">
+                <img src="img/plat1.jpg" alt="Velouté" class="w-100">
+                <p class="titre-img">Velouté</p>
+                <div class="action-img-buttons" data-show="admin">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#EditionPhotoModal"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#DeletePhotoModal"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col pt-3"> 
+            <div class="img-card">
+                <img src="img/galerie1.jpg" alt="Pain" class="w-100">
+                <p class="titre-img">Pain</p>
+                <div class="action-img-buttons" data-show="admin">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#EditionPhotoModal"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#DeletePhotoModal"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col pt-3"> 
+            <div class="img-card">
+                <img src="img/plat2.jpg" alt="Escalope" class="w-100">
+                <p class="titre-img">Escalope</p>
+                <div class="action-img-buttons" data-show="admin">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#EditionPhotoModal"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#DeletePhotoModal"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col pt-3"> 
+            <div class="img-card">
+                <img src="img/galerie2.jpg" alt="Gâteau" class="w-100">
+                <p class="titre-img">Gâteau</p>
+                <div class="action-img-buttons" data-show="admin">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#EditionPhotoModal"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#DeletePhotoModal"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col pt-3"> 
+            <div class="img-card">
+                <img src="img/table.jpg" alt="Tablée" class="w-100">
+                <p class="titre-img">Tablée</p>
+                <div class="action-img-buttons" data-show="admin">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#EditionPhotoModal"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#DeletePhotoModal"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col pt-3"> 
+            <div class="img-card text-white">
+                <img src="img/plat4.jpg" alt="Recette du chef" class="w-100">
+                <p class="titre-img">Recette du chef</p>
+                <div class="action-img-buttons" data-show="admin">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#EditionPhotoModal"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#DeletePhotoModal"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col pt-3"> 
+            <div class="img-card text-white">
+                <img src="img/galerie3.jpg" alt="Beignet" class="w-100">
+                <p class="titre-img">Beignet</p>
+                <div class="action-img-buttons" data-show="admin">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#EditionPhotoModal"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#DeletePhotoModal"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col pt-3"> 
+            <div class="img-card text-white">
+                <img src="img/plat5.jpg" alt="Daurade" class="w-100">
+                <p class="titre-img">Daurade</p>
+                <div class="action-img-buttons" data-show="admin">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#EditionPhotoModal"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#DeletePhotoModal"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center pt-4">
+        <a href="/reservation" class="btn btn-primary">Réserver</a>
+    </div>
+</div>
+
+<!-- Modal edition (même que pour l'ajout)-->
+<div class="modal fade" id="EditionPhotoModal" tabindex="-1" aria-labelledby="EditionPhotoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="EditionPhotoModalLabel">Edition Photo</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                  <label for="NamePhotoInput" class="form-label">Titre</label>
+                  <input type="text" class="form-control" id="NamePhotoInput" placeholder="Lasagnes à la bolognese" name="Titre"> 
+                </div>
+                <div class="mb-3">
+                  <label for="ImageInput" class="form-label">Image</label>
+                  <input type="file" class="form-control" id="ImageInput"  name="Image">
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal suppression -->
+<div class="modal fade" id="DeletePhotoModal" tabindex="-1" aria-labelledby="DeletePhotoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="DeletePhotoModalLabel">Voulez-vous vraiment supprimer cette photo ?</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                  <p>Titre</p>
+                  <img src="img/plat5.jpg" alt="Daurade" class="w-100">
+                  <!-- mettre la bonne image -->
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger">Supprimer</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center footer py-4">
+        <div class="row">
+            <div class="col-12 col-lg-4 d-flex flex-column align-item-center justify-content-center">
+                <h2 class="text-secondary">Nos horaires</h2>
+                <p>Du mardi au dimanche  12:00-14:00  18:00-23:00</p>
+            </div>
+            <div class="col-6 col-lg-4 d-flex flex-column align-item-center justify-content-center">
+                <p>Quai Antique <br/>
+                    5 rue de la route <br/>
+                    31150 Ville <br/>
+                    04 01 01 01 01 <br/>
+                </p>
+            </div>
+            <div class="col-6 col-lg-4 d-flex flex-column align-item-center justify-content-center">
+                <p>contact@quaiantique.com</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- pour inclure mon système de routage :  -->
+     <script src="public/js/script.js"></script>
+    <script type="module" src="Router/router.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

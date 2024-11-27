@@ -1,0 +1,340 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+
+//******** COULEURS ********
+$primary: #B97F59;
+$secondary: #F9E7CF;
+$dark: #400404;
+
+// couleurs texte
+$body-color: #F9E7CF;
+
+// bg
+$body-bg:#730202;
+$body-bg-dark: #400404;
+$body-bg-info: #3D5507;
+//******** FIN COULEURS ********
+
+// ******** STYLE ET FONTS ********* 
+// / le !important au lieu de default me permet d'assurer que ça soit la bonne police
+$font-family-sans-serif: "Nunito", sans-serif !important;
+$font-family-serif: "RaSa", serif !important;
+$font-family-base: "Montaga", serif !important;
+
+// Détails fonts des textes
+h1 {
+    font-family: $font-family-serif;
+    font-size: 3rem !important;
+}
+
+h2 {
+    font-family: $font-family-sans-serif;
+    font-style: italic;
+    font-size: 1.25rem !important;
+}
+
+p, body, a {
+    font-family: $font-family-base;
+    font-size: 1rem !important;
+    color: #F9E7CF !important;
+}
+// ******** FIN STYLE ET FONTS ********* 
+
+//******* MENU / NAVBAR *******
+.navbar[data-bs-theme="dark"] {
+    background-color: $body-bg-dark !important;
+
+    .nav-link {
+        color: #F9E7CF !important;
+
+        &:hover {
+            color: #B97F59 !important;
+            // text-decoration: underline;
+            font-weight: bold;
+        }
+    }
+}
+//******* FIN MENU / NAVBAR *******
+
+//******* CONTENU MAIN *******
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+main {
+    margin-bottom: 200px;
+    // pour m'assurer que le footer ne se superpose pas sur le contenu "main". mon footer est à 162px de hauteur, 
+    // je prends donc 200px pour faire de la marge
+    @media (max-width: 767px) { // Ajustement pour les écrans de type mobile
+        margin-bottom: 280px; // Augmenter la marge pour les écrans mobiles
+    }
+}
+//******* FIN CONTENU MAIN *******
+
+//********* FOOTER ************
+footer.footer {
+    padding: 25px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+// Bordures verticales sur les écrans larges
+@media (min-width: 992px) { // `lg` et au-dessus
+    .footer .col-lg-4 {
+        border-left: 1px solid $secondary; // Bordure verticale
+    }
+    .footer .col-lg-4:first-child {
+        border-left: none; // Pas de bordure à gauche du premier bloc
+    }
+}
+
+// Bordure horizontale sur les petits écrans (mobile)
+@media (max-width: 991px) { // `md` et en dessous
+    .footer .col-lg-4:first-child {
+        border-bottom: 1px solid $secondary; // Bordure horizontale sous la première colonne
+        padding-bottom: 1rem; // Espace entre la bordure et le contenu en dessous
+        width: 80%; // Ajustez cette valeur pour la longueur du séparateur
+        margin: 0 auto; // Centre le séparateur
+    }
+    .footer .col-6 {
+        margin-top: 1rem; // Espace supplémentaire au-dessus des colonnes inférieures
+    }
+}
+//********* FIN FOOTER ************
+
+//******* BOUTONS ******
+.btn-primary {
+    color: #F9E7CF !important;
+    background-color: #B97F59;
+    border-color: #B97F59;
+
+    &:hover {
+        background-color: lighten($primary, 10%) !important;
+        color: #F9E7CF;
+    }
+}
+
+.btn-secondary {
+    color: #F9E7CF !important;
+    background-color: transparent !important;
+    border: 1px solid #F9E7CF;
+
+    &:hover {
+        background-color: #F9E7CF !important;
+        color: #730202 !important;
+    }
+}
+
+//******* FIN BOUTONS ******
+
+//**** BIG TITLE ****
+
+// avec filtre noir
+.bigtitle {
+    position: relative;
+    // margin-bottom: 15px;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("../img/fond.jpg");
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.6);
+    }
+
+    //pour positionner les éléments devant le "before" donc devant l'image
+    * {
+        position: relative;
+    }
+
+    .bigtitle-content {
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// sans filtre
+// .bigtitle {
+//         background-image: url("../img/fond.jpg");
+//         background-size: cover;
+// }
+//**** FIN BIG TITLE ****
+
+// ****** HOME ******
+
+.home-square1 {
+    height: 400px;
+    width: 400px;
+    background-size: cover;          // Met l'image en plein
+    background-position: center;     // Centre l'image pour afficher la partie du milieu
+    background-image: url("../img/chef.jpg");
+}
+
+.home-square2 {
+    height: 400px;
+    width: 400px;
+    background-size: cover;          // Met l'image en plein
+    background-position: center;     // Centre l'image pour afficher la partie du milieu
+    background-image: url("../img/plat.jpg");
+}
+
+.home-square3 {
+    height: 400px;
+    width: 400px;
+    background-size: cover;          // Met l'image en plein
+    background-position: center;     // Centre l'image pour afficher la partie du milieu
+    background-image: url("../img/table.jpg");
+    padding-bottom: 0 !important;
+}
+
+// Container modification pour mobile
+@media (max-width: 768px) {
+    .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        // padding-bottom: 0 !important;
+        max-width: 100% !important;
+    }
+    
+    // Supprime les marges de la row
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    // Supprime le padding des colonnes
+    [class*="col-"] {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+// Modification des home-squares
+.home-square1, .home-square2, .home-square3 {
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    transition: all 0.3s ease;
+    
+    @media (max-width: 768px) {
+        height: 300px;
+        width: 100vw; // Utilise toute la largeur de la vue
+        margin: 0; // Supprime les marges
+    }
+}
+
+// Ajustement du contenu texte en mobile
+@media (max-width: 768px) {
+    .col-6.pt-4 {
+        padding: 2rem 1rem !important; // Garde le padding pour le texte uniquement
+    }
+    
+    // Si vous avez une div bg-dark, ajustez également ses marges
+    .row.bg-dark {
+        margin: 0 !important;
+    }
+}
+
+.row.bg-dark {
+    // Style de base (desktop)
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    
+    // Conteneur parent spécifique pour bg-dark
+    .container & {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+}
+// ****** FIN HOME *******
+
+// ****** GALERIE *******
+
+.img-card {
+    
+    // height: 300px;
+    // width: 100% !important;
+    position: relative;
+    &:hover {
+        .titre-img, .action-img-buttons{
+            opacity: 1;
+        }
+        img {
+            filter: brightness(0.3);
+        }
+    }
+
+    img {
+        transition: all 0.3s ease;
+        height: 300px;
+        // height: 100%;
+        object-fit: cover;
+        // pour centrer l'image
+        width: 100%;
+        // object-fit: cover;
+        // width: 100% !important;
+    }
+
+    .titre-img {
+        opacity: 0;
+        //pour centrer le texte + ajouter position relative au parent
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        // fin centrage
+        transition: all 0.3s ease;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    // Bouttons edit et delete pour la galerie
+    .action-img-buttons {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 5%;
+        display: flex;
+        justify-content: space-between;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+}
+
+// ****** FIN GALERIE *******
+
+// ******* FORMULAIRE *******
+.form-label {
+    color: #F9E7CF;
+}
+// ****** FIN FORMULAIRE ****** //
+
+// ******* ALL RÉSA *******
+
+.allreservations{
+    a{
+        display: block;
+        // color: black;
+        padding:10px;
+    }
+}
+
+// ******* FIN ALL RÉSA *******
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
